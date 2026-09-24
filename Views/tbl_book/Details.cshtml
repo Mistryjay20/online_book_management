@@ -1,0 +1,75 @@
+﻿@model online_book_management.Models.tbl_book
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.book_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.book_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.book_pub_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.book_pub_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ISBN_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISBN_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_author.author_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_author.author_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_booktype.booktype_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_booktype.booktype_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_publisher.pub_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_publisher.pub_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.book_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
