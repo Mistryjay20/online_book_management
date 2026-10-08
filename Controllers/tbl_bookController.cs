@@ -37,12 +37,23 @@ namespace online_book_management.Controllers
         }
 
         // GET: tbl_book/Create
-        public ActionResult Create()
+        public ActionResult Create(int? booktype_id,string book_name)
         {
-            ViewBag.author_id = new SelectList(db.tbl_author, "author_id", "author_name");
-            ViewBag.booktype_id = new SelectList(db.tbl_booktype, "booktype_id", "booktype_name");
+            var book = new tbl_book
+            {
+                book_name = book_name
+            };
+            ViewBag.booktype_id = new SelectList(db.tbl_booktype, "booktype_id", "booktype_name", booktype_id);
+            List<SelectListItem> authors = db.tbl_author
+                .Where(a => a.booktype_id == booktype_id)
+                .Select(a => new SelectListItem
+                {
+                    Text = a.author_name,
+                    Value = a.author_id.ToString()
+                }).ToList();
+            ViewBag.author_id = authors;
             ViewBag.pub_id = new SelectList(db.tbl_publisher, "pub_id", "pub_name");
-            return View();
+            return View(book);
         }
 
         // POST: tbl_book/Create
@@ -52,34 +63,60 @@ namespace online_book_management.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "book_id,book_name,booktype_id,author_id,pub_id,book_pub_date,ISBN_No,Price")] tbl_book tbl_book)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.tbl_book.Add(tbl_book);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.author_id = new SelectList(db.tbl_author, "author_id", "author_name", tbl_book.author_id);
-            ViewBag.booktype_id = new SelectList(db.tbl_booktype, "booktype_id", "booktype_name", tbl_book.booktype_id);
-            ViewBag.pub_id = new SelectList(db.tbl_publisher, "pub_id", "pub_name", tbl_book.pub_id);
-            return View(tbl_book);
-        }
+
+                if (ModelState.IsValid)
+                {
+                    var type = db.tbl_booktype.Find(tbl_book.booktype_id);
+                    if (type.booktype_name == "Fiction")
+                    {
+                        tbl_book.Price = tbl_book.Price - (tbl_book.Price * 10 / 100);
+                    }
+                    db.tbl_book.Add(tbl_book);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.author_id = new SelectList(db.tbl_author, "author_id", "author_name", tbl_book.author_id);
+                ViewBag.booktype_id = new SelectList(db.tbl_booktype, "booktype_id", "booktype_name", tbl_book.booktype_id);
+                ViewBag.pub_id = new SelectList(db.tbl_publisher, "pub_id", "pub_name", tbl_book.pub_id);
+                return View(tbl_book);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.error = "Error:" + ex;
+                return View();
+            }
+            }
+            
 
         // GET: tbl_book/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? id, int? booktype_id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             tbl_book tbl_book = db.tbl_book.Find(id);
-            if (tbl_book == null)
+
+            if (booktype_id == null)
             {
-                return HttpNotFound();
+                booktype_id = tbl_book.booktype_id;
             }
-            ViewBag.author_id = new SelectList(db.tbl_author, "author_id", "author_name", tbl_book.author_id);
-            ViewBag.booktype_id = new SelectList(db.tbl_booktype, "booktype_id", "booktype_name", tbl_book.booktype_id);
+
+            ViewBag.booktype_id = new SelectList(db.tbl_booktype, "booktype_id", "booktype_name", booktype_id);
+
+            List<SelectListItem> authors = db.tbl_author
+                .Where(a => a.booktype_id == booktype_id)
+                .Select(a => new SelectListItem
+                {
+                    Text = a.author_name,
+                    Value = a.author_id.ToString(),
+                    Selected = a.author_id == tbl_book.author_id
+                }).ToList();
+
+            ViewBag.author_id = authors;
+
             ViewBag.pub_id = new SelectList(db.tbl_publisher, "pub_id", "pub_name", tbl_book.pub_id);
+
             return View(tbl_book);
         }
 
