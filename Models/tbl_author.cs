@@ -25,6 +25,7 @@ namespace online_book_management.Models
         public string author_email { get; set; }
         public Nullable<int> booktype_id { get; set; }
         public Nullable<int> phone { get; set; }
+        public string password { get; set; }
     
         public virtual tbl_booktype tbl_booktype { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

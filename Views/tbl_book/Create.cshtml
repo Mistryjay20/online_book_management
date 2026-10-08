@@ -4,7 +4,6 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @if (ViewBag.error != null)
 {
     <div class="alert alert-danger">
@@ -24,47 +23,73 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.book_name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.book_name, "Book Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.book_name, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.book_name, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="text" name="book_name" id="book_name" value="@Model.book_name" class="form-control" />
                 @Html.ValidationMessageFor(model => model.book_name, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.booktype_id, "booktype_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.booktype_id, "Book Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("booktype_id", null, htmlAttributes: new { @class = "form-control" })
+                @*@Html.DropDownList("booktype_id", null,"-- Select Book Type --", htmlAttributes: new { @class = "form-control" })*@
+                <select id="booktype_id" name="booktype_id" class="form-control"
+                        onchange="window.location.href = '@Url.Action("Create", "tbl_book")?booktype_id=' + this.value
+        + '&book_name=' + encodeURIComponent(document.getElementById('book_name').value)">
+
+                    <option value="">-- Select Book Type --</option>
+
+                    @if (ViewBag.booktype_id != null)
+                    {
+                        foreach (var item in ViewBag.booktype_id)
+                        {
+                            <option value="@item.Value" @(item.Selected ? "selected" : "")>
+                                @item.Text
+                            </option>
+                        }
+                    }
+                </select>
                 @Html.ValidationMessageFor(model => model.booktype_id, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.author_id, "author_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.author_id, "Author", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("author_id", null, htmlAttributes: new { @class = "form-control" })
+                @*@Html.DropDownList("author_id", null,"-- Select Author --", htmlAttributes: new { @class = "form-control" })*@
+                <select name="author_id" class="form-control">
+                    <option value="">-- Select Author --</option>
+
+                    @foreach (var item in ViewBag.author_id)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
                 @Html.ValidationMessageFor(model => model.author_id, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.pub_id, "pub_id", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.pub_id, "Publisher", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("pub_id", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("pub_id", null, "-- Select Publisher --", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.pub_id, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.book_pub_date, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.book_pub_date, "Publish Date", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.book_pub_date, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.book_pub_date, new { htmlAttributes = new { @class = "form-control" } })*@
+                <input type="date" name="book_pub_date" id="book_pub_date" class="form-control" />
                 @Html.ValidationMessageFor(model => model.book_pub_date, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ISBN_No, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ISBN_No, "ISBN No", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ISBN_No, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ISBN_No, "", new { @class = "text-danger" })
@@ -72,7 +97,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Price, "Price", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
