@@ -19,7 +19,7 @@ namespace online_book_management.Models
         public Nullable<int> booktype_id { get; set; }
         public Nullable<int> author_id { get; set; }
         public Nullable<int> pub_id { get; set; }
-        public Nullable<System.DateTime> book_pub_date { get; set; }
+        public string book_pub_date { get; set; }
         public string ISBN_No { get; set; }
         public Nullable<decimal> Price { get; set; }
     

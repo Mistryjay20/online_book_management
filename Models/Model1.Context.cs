@@ -13,10 +13,10 @@ namespace online_book_management.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class dbBookEntities1 : DbContext
+    public partial class dbBookEntities3 : DbContext
     {
-        public dbBookEntities1()
-            : base("name=dbBookEntities1")
+        public dbBookEntities3()
+            : base("name=dbBookEntities3")
         {
         }
     

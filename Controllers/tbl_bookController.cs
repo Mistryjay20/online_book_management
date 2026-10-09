@@ -12,7 +12,7 @@ namespace online_book_management.Controllers
 {
     public class tbl_bookController : Controller
     {
-        private dbBookEntities db = new dbBookEntities();
+        private dbBookEntities3 db = new dbBookEntities3();
 
         // GET: tbl_book
         public ActionResult Index()

@@ -14,7 +14,7 @@ namespace online_book_management.Controllers
 {
     public class LoginController : Controller
     {
-        private dbBookEntities1 db = new dbBookEntities1();
+        private dbBookEntities3 db = new dbBookEntities3();
 
         // GET: Login
         public ActionResult Index()

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbBookModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dbBookModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_author">
           <Key>
             <PropertyRef Name="author_id" />
@@ -25,7 +25,7 @@
           <Property Name="booktype_id" Type="int" />
           <Property Name="author_id" Type="int" />
           <Property Name="pub_id" Type="int" />
-          <Property Name="book_pub_date" Type="date" />
+          <Property Name="book_pub_date" Type="varchar" MaxLength="50" />
           <Property Name="ISBN_No" Type="varchar" MaxLength="50" />
           <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
@@ -91,7 +91,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dbBookModel1StoreContainer">
+        <EntityContainer Name="dbBookModelStoreContainer">
           <EntitySet Name="tbl_author" EntityType="Self.tbl_author" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_book" EntityType="Self.tbl_book" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_booktype" EntityType="Self.tbl_booktype" Schema="dbo" store:Type="Tables" />
@@ -117,7 +117,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="dbBookModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="dbBookModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="tbl_author">
           <Key>
             <PropertyRef Name="author_id" />
@@ -140,7 +140,7 @@
           <Property Name="booktype_id" Type="Int32" />
           <Property Name="author_id" Type="Int32" />
           <Property Name="pub_id" Type="Int32" />
-          <Property Name="book_pub_date" Type="DateTime" Precision="0" />
+          <Property Name="book_pub_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ISBN_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="tbl_author" Relationship="Self.FK_tbl_book_ToTable_1" FromRole="tbl_book" ToRole="tbl_author" />
@@ -212,7 +212,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dbBookEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dbBookEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbl_author" EntityType="Self.tbl_author" />
           <EntitySet Name="tbl_book" EntityType="Self.tbl_book" />
           <EntitySet Name="tbl_booktype" EntityType="Self.tbl_booktype" />
@@ -239,9 +239,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbBookModel1StoreContainer" CdmEntityContainer="dbBookEntities1">
+        <EntityContainerMapping StorageEntityContainer="dbBookModelStoreContainer" CdmEntityContainer="dbBookEntities3">
           <EntitySetMapping Name="tbl_author">
-            <EntityTypeMapping TypeName="dbBookModel1.tbl_author">
+            <EntityTypeMapping TypeName="dbBookModel.tbl_author">
               <MappingFragment StoreEntitySet="tbl_author">
                 <ScalarProperty Name="author_id" ColumnName="author_id" />
                 <ScalarProperty Name="author_name" ColumnName="author_name" />
@@ -253,7 +253,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_book">
-            <EntityTypeMapping TypeName="dbBookModel1.tbl_book">
+            <EntityTypeMapping TypeName="dbBookModel.tbl_book">
               <MappingFragment StoreEntitySet="tbl_book">
                 <ScalarProperty Name="book_id" ColumnName="book_id" />
                 <ScalarProperty Name="book_name" ColumnName="book_name" />
@@ -267,7 +267,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_booktype">
-            <EntityTypeMapping TypeName="dbBookModel1.tbl_booktype">
+            <EntityTypeMapping TypeName="dbBookModel.tbl_booktype">
               <MappingFragment StoreEntitySet="tbl_booktype">
                 <ScalarProperty Name="booktype_id" ColumnName="booktype_id" />
                 <ScalarProperty Name="booktype_name" ColumnName="booktype_name" />
@@ -275,7 +275,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_publisher">
-            <EntityTypeMapping TypeName="dbBookModel1.tbl_publisher">
+            <EntityTypeMapping TypeName="dbBookModel.tbl_publisher">
               <MappingFragment StoreEntitySet="tbl_publisher">
                 <ScalarProperty Name="pub_id" ColumnName="pub_id" />
                 <ScalarProperty Name="pub_name" ColumnName="pub_name" />

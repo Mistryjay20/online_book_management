@@ -136,21 +136,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BookData.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BookData.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BookData.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BookData.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BookData.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BookData.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -204,16 +189,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\BookData.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BookData.Context.cs</LastGenOutput>
-      <DependentUpon>BookData.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\BookData.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BookData.edmx</DependentUpon>
-      <LastGenOutput>BookData.cs</LastGenOutput>
-    </Content>
     <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -230,13 +205,6 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\BookData.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BookData.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\BookData.edmx.diagram">
-      <DependentUpon>BookData.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>

@@ -1,52 +1,14 @@
-﻿@model IEnumerable<online_book_management.Models.tbl_author>
+﻿@model online_book_management.Models.tbl_author
 
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (ViewBag.Welcome != null)
+{
+    <h1 class="alert alert-info"> @ViewBag.Welcome</h1>
+}
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.author_name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.author_email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tbl_booktype.booktype_name)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.author_name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.author_email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbl_booktype.booktype_name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.author_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.author_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.author_id })
-        </td>
-    </tr>
-}
-
-</table>
